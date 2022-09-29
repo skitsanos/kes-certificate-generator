@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  kes-server:
+    container_name: kes-dev
+    image: "minio/kes"
+    ports:
+      - "7373:7373"
+    volumes:
+      - ./cert/:/etc/kes/cert
+      - ./config/:/etc/kes/config
+    command: "server --config /etc/kes/config/config.yml --auth off"
+
+  kes-get-identity:
+    image: "minio/kes"
+    volumes:
+      - ./cert/:/etc/kes/cert
+    command: "identity of /etc/kes/cert/client.crt"

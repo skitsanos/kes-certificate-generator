@@ -1,0 +1,23 @@
+address: 0.0.0.0:7373
+
+log:
+  error: on
+  audit: on
+
+admin:
+  identity: disable
+
+tls:
+  key: /etc/kes/cert/root.key
+  cert: /etc/kes/cert/root.crt
+
+policy:
+  my-app:
+    allow:
+      - /v1/key/*/*
+    identities:
+      - 59b25f1b844225b56a2b2fa4f3e6d6c218ee8204201dbf1e535ff32dab9fd300
+
+keystore:
+  fs:
+    path: ./keys
