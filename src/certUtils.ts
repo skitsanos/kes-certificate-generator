@@ -236,6 +236,4 @@ class CertUtils
     }
 }
 
-//openssl x509 -noout -text -in client.crt | grep DNS
-
 export default CertUtils;

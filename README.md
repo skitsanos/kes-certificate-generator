@@ -53,6 +53,12 @@ Or for the client certificate:
 openssl x509 -noout -in /etc/kes/cert/client.crt -enddate
 ```
 
+### Check certificate alt names
+
+```shell
+openssl x509 -noout -text -in /etc/kes/cert/client.crt | grep DNS | xargs
+```
+
 ### Getting certificate identity
 
 Once the certificates are created, you need to enlist the client certificate identity in the KES server config file; you can find the configuration example at this repo in `kes/config/config.yml`. To get the certificate identity, run this command:
