@@ -34,15 +34,6 @@ const getCertNotAfter = (notBefore: string | Date): Date =>
     return dayjs().endOf('day').toDate();
 };
 
-// Get CA Expiration Date (Valid for 100 Years)
-const getCANotAfter = notBefore =>
-{
-    const year = notBefore.getFullYear() + 100;
-    const month = (notBefore.getMonth() + 1).toString().padStart(2, '0');
-    const day = notBefore.getDate();
-    return new Date(`${year}-${month}-${day} 23:59:59Z`);
-};
-
 const DEFAULT_C = 'Israel';
 const DEFAULT_ST = 'IL';
 const DEFAULT_L = 'Tel Aviv';
@@ -115,7 +106,7 @@ class CertUtils
         cert.privateKey = privateKey;
         cert.serialNumber = randomSerialNumber();
         cert.validity.notBefore = getCertNotBefore();
-        cert.validity.notAfter = getCANotAfter(validUntil || dayjs().add(30, 'd').toDate());
+        cert.validity.notAfter = getCertNotAfter(validUntil || dayjs().add(30, 'd').toDate());
         cert.setSubject(attributes);
         cert.setIssuer(attributes);
         cert.setExtensions(extensions);
@@ -222,7 +213,7 @@ class CertUtils
         newHostCert.publicKey = hostKeys.publicKey;
         newHostCert.serialNumber = randomSerialNumber();
         newHostCert.validity.notBefore = getCertNotBefore();
-        newHostCert.validity.notAfter = getCertNotAfter(validUntil);
+        newHostCert.validity.notAfter = getCertNotAfter(validUntil || dayjs().add(30, 'd').toDate());
         newHostCert.setSubject(attributes);
         newHostCert.setIssuer(caCert.subject.attributes);
         newHostCert.setExtensions(extensions);

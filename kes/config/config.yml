@@ -15,8 +15,10 @@ policy:
   my-app:
     allow:
       - /v1/key/*/*
+      - /v1/identity/*/*
+      - /v1/policy/*/*
     identities:
-      - 59b25f1b844225b56a2b2fa4f3e6d6c218ee8204201dbf1e535ff32dab9fd300
+      - f56ff90af3825d916b5903bc47a82b5c29c94702ff43e08cc1a02ece7f6f1d2d
 
 keystore:
   fs:

@@ -39,6 +39,20 @@ tls:
   cert: /etc/kes/cert/root.crt
 ```
 
+### Checking certificate validity with OpenSSL
+
+To test the `root` certificate validity with OpenSSL, execute the following:
+
+```shell
+openssl x509 -noout -in /etc/kes/cert/root.crt -enddate
+```
+
+Or for the client certificate:
+
+```shell
+openssl x509 -noout -in /etc/kes/cert/client.crt -enddate
+```
+
 ### Getting certificate identity
 
 Once the certificates are created, you need to enlist the client certificate identity in the KES server config file; you can find the configuration example at this repo in `kes/config/config.yml`. To get the certificate identity, run this command:
@@ -85,13 +99,17 @@ services:
 
 ### Testing client certificates
 
-To test the certificate, you can execute the following:
+To test the certificate, for example to list all the keys on KES server:
 
 
 ```shell
 export KES_SERVER=https://localhost:7373
-export KES_CLIENT_KEY=kes/cert/client.key
-export KES_CLIENT_CERT=kes/cert/client.cert
+export KES_CLIENT_KEY=/etc/kes/cert/client.key
+export KES_CLIENT_CERT=/etc/kes/cert/client.crt
 
-curl -sSL --tlsv1.3 --key ./kes/cert/client.key --cert ./kes/cert/client.cert -X POST 'https://localhost:7373/v1/key/list'
+curl -sSL --tlsv1.3 -k --key /etc/kes/cert/client.key --cert /etc/kes/cert/client.crt -X GET 'https://localhost:7373/v1/key/list/*'
+
+#or with kes CLI:
+
+kes key ls -k
 ```
