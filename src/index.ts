@@ -11,7 +11,6 @@ const ca = CertUtils.createRootCA(dayjs().add(1, 'y').toDate());
 
 const privateCert = CertUtils.createHostCert(new Date(), 'localhost', [
     'localhost',
-    'kes-server',
     '127.0.0.1'
 ], ca);
 
