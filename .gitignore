@@ -1,4 +1,4 @@
 .idea/
 node_modules/
 kes/cert/
-*.yarn.lock
+*.lock
