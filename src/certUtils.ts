@@ -1,6 +1,7 @@
-import {util, random, pki, md} from 'node-forge';
+import {md, pki, random, util} from 'node-forge';
 import dayjs from 'dayjs';
-
+import {existsSync, readFileSync} from 'fs-extra';
+import {X509Certificate} from 'crypto';
 import {isIP} from 'net';
 
 const makeNumberPositive = hexString =>
@@ -204,7 +205,8 @@ class CertUtils
                         value: address
                     };
                 })
-            }];
+            }
+        ];
 
         // Create an empty Certificate
         const newHostCert = pki.createCertificate();
@@ -234,6 +236,16 @@ class CertUtils
             notAfter
         };
     }
+
+    static getAltNames = (path: string): string =>
+    {
+        if (existsSync(path))
+        {
+            return new X509Certificate(readFileSync(path)).subjectAltName;
+        }
+
+        throw new Error('Path not found');
+    };
 }
 
 export default CertUtils;
