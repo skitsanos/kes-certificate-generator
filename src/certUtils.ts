@@ -21,7 +21,7 @@ const makeNumberPositive = hexString =>
 const randomSerialNumber = () => makeNumberPositive(util.bytesToHex(random.getBytesSync(20)));
 
 // Get the Not Before Date for a Certificate (will be valid from 2 days ago)
-const getCertNotBefore = (): Date => dayjs().subtract(2, 'd').toDate();
+const getCertNotBefore = (): Date => dayjs().subtract(1, 'd').toDate();
 
 // Get Certificate Expiration Date (Valid for 90 Days)
 const getCertNotAfter = (notBefore: string | Date): Date =>

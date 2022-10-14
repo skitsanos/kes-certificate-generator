@@ -7,7 +7,7 @@ import path from 'path';
 const pathToCertificates = path.join(__dirname, '../kes/cert/');
 fs.ensureDirSync(pathToCertificates);
 
-const validUntil = dayjs().add(1, 'y').toDate();
+const validUntil = new Date(dayjs().add(1, 'y').toString());
 
 const ca = CertUtils.createRootCA(validUntil);
 
