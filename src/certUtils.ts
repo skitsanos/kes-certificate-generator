@@ -62,42 +62,34 @@ class CertUtils
         const attributes = [{
             shortName: 'C',
             value: DEFAULT_C
-        }, {
-            shortName: 'ST',
-            value: DEFAULT_ST
-        }, {
-            shortName: 'L',
-            value: DEFAULT_L
-        }, {
-            shortName: 'CN',
-            value: 'Development RootCA'
-        }];
+        },
+            {
+                shortName: 'ST',
+                value: DEFAULT_ST
+            },
+            {
+                shortName: 'L',
+                value: DEFAULT_L
+            },
+            {
+                shortName: 'O',
+                value: 'Skitsanos'
+            },
+            {
+                shortName: 'OU',
+                value: 'DevOps'
+            },
+            {
+                shortName: 'CN',
+                value: 'Development RootCA'
+            }];
 
         const extensions = [
             {
                 name: 'basicConstraints',
                 cA: true
-            },
-            {
-                name: 'keyUsage',
-                serverAuth: true,
-                clientAuth: true,
-                codeSigning: true,
-                emailProtection: true,
-                timeStamping: true,
-                keyCertSign: true,
-                cRLSign: true
-            },
-            {
-                name: 'nsCertType',
-                client: true,
-                server: true,
-                email: true,
-                objsign: true,
-                sslCA: true,
-                emailCA: true,
-                objCA: true
-            }];
+            }
+        ];
 
         // Create an empty Certificate
         const cert = pki.createCertificate();
@@ -113,7 +105,7 @@ class CertUtils
         cert.setExtensions(extensions);
 
         // Self-sign the Certificate
-        cert.sign(privateKey, md.sha512.create());
+        cert.sign(privateKey, md.sha256.create());
 
         // Convert to the PEM format
         const pemCert = pki.certificateToPem(cert);

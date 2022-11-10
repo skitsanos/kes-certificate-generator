@@ -9,17 +9,17 @@ fs.ensureDirSync(pathToCertificates);
 
 const validUntil = new Date(dayjs().add(1, 'y').toString());
 
-const ca = CertUtils.createRootCA(validUntil);
+const ca = CertUtils.createRootCA(validUntil, );
 
 const privateCert = CertUtils.createHostCert(validUntil, 'localhost', [
     'localhost',
     '127.0.0.1'
-], ca);
+], ca, );
 
 fs.writeFileSync(path.join(pathToCertificates, 'root.crt'), ca.certificate.toString());
 fs.writeFileSync(path.join(pathToCertificates, 'root.key'), ca.privateKey.toString());
 
-fs.writeFileSync(path.join(pathToCertificates, 'client.crt'), privateCert.certificate.toString());
-fs.writeFileSync(path.join(pathToCertificates, 'client.key'), privateCert.privateKey.toString());
+fs.writeFileSync(path.join(pathToCertificates, 'leaf.crt'), privateCert.certificate.toString());
+fs.writeFileSync(path.join(pathToCertificates, 'leaf.key'), privateCert.privateKey.toString());
 
-console.log(CertUtils.getAltNames(path.join(pathToCertificates, 'client.crt')));
+console.log(CertUtils.getAltNames(path.join(pathToCertificates, 'leaf.crt')));
