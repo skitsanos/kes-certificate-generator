@@ -112,7 +112,10 @@ class CertUtils
 
         const pemKey = !password ? pki.privateKeyToPem(privateKey) : pki.encryptRsaPrivateKey(privateKey, password);
 
-        const {notBefore, notAfter} = cert.validity;
+        const {
+            notBefore,
+            notAfter
+        } = cert.validity;
 
         // Return the PEM encoded cert and private key
         return {
@@ -134,11 +137,11 @@ class CertUtils
         {
             throw new Error('"validDomains" must be an Array of Strings');
         }
-        if (rootCAObject && (Object.prototype.hasOwnProperty.call(rootCAObject, 'encrypted') && !rootPassword))
+        if (rootCAObject && (Object.hasOwn(rootCAObject, 'encrypted') && !rootPassword))
         {
             throw new Error('The root password is missing');
         }
-        if (!rootCAObject || !Object.prototype.hasOwnProperty.call(rootCAObject, 'certificate') || !Object.prototype.hasOwnProperty.call(rootCAObject, 'privateKey'))
+        if (!rootCAObject || !Object.hasOwn(rootCAObject, 'certificate') || !Object.hasOwn(rootCAObject, 'privateKey'))
         {
             throw new Error('"rootCAObject" must be an Object with the properties "certificate" & "privateKey"');
         }
@@ -219,7 +222,10 @@ class CertUtils
         const pemHostCert = pki.certificateToPem(newHostCert);
         const pemHostKey = pki.privateKeyToPem(hostKeys.privateKey);
 
-        const {notBefore, notAfter} = newHostCert.validity;
+        const {
+            notBefore,
+            notAfter
+        } = newHostCert.validity;
 
         return {
             certificate: pemHostCert,

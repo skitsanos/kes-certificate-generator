@@ -9,21 +9,21 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "bundle": "npx ncc build src/index.ts --target es2020 -o dist",
+    "depupdates": "npx npm-check-updates -u",
     "get-identity": "docker run -v \"$(pwd)\"/kes/cert:/etc/kes/cert --rm -it minio/kes identity of /etc/kes/cert/client.crt"
   },
   "dependencies": {
-    "dayjs": "^1.11.5",
-    "fs-extra": "^11.0.0",
-    "node-forge": "^1.3.1"
+    "dayjs": "^1.11.9",
+    "fs-extra": "^11.1.1",
+    "global": "^4.4.0",
+    "node-forge": "^1.3.1",
+    "npm-check-updates": "^16.13.3"
   },
   "devDependencies": {
-    "@swc/core": "^1.3.3",
-    "@types/fs-extra": "^11.0.0",
-    "@types/node-forge": "^1.3.0",
-    "@vercel/ncc": "^0.38.0",
+    "@types/fs-extra": "^11.0.1",
+    "@types/node-forge": "^1.3.4",
     "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.1.0",
-    "typescript": "^5.0.2"
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2"
   }
 }

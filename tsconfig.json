@@ -2,6 +2,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "target": "ES2022",
     "baseUrl": ".",
     "paths": {
       "@": [
